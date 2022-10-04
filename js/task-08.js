@@ -1,14 +1,10 @@
 const form = document.querySelector('.login-form');
 
 form.addEventListener('submit', onFormSubmit);
-form.addEventListener('submit', (event) => { 
 
-    event.target.reset(); 
-    });
+function onFormSubmit (e) {
 
-function onFormSubmit (event) {
-
-    event.preventDefault();
+    e.preventDefault();
 
     const formElements = event.currentTarget.elements;
     const mail = formElements.email.value;
@@ -20,4 +16,5 @@ function onFormSubmit (event) {
     }
 
     console.log(formData);
+    e.target.reset(); 
 }

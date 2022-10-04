@@ -1,8 +1,13 @@
 const inputEl = document.querySelector('input[type="range"]');
 const spanEl = document.querySelector('#text');
 
-inputEl.addEventListener('input', onRangeChange);
+console.log(spanEl);
 
-function onRangeChange(event) {
-  spanEl.textContent = event.target.value;
+console.log(inputEl);
+
+inputEl.addEventListener('input', onFontSizeChange);
+
+function onFontSizeChange(e) {
+  const textSize = e.target.value;
+  spanEl.style.fontSize = `${textSize}px`;
 }
