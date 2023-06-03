@@ -1,45 +1,40 @@
-const inputEl = document.querySelector('input[type="number"]');
-const createBtn = document.querySelector('button[data-action="create"]');
-const destroyBtn = document.querySelector('button[data-action="destroy"]');
-const boxEl = document.querySelector('#boxes');
+const inputRef = document.querySelector("input");
+const creatBtnRef = document.querySelector('[data-create]');
+const destroyBtnRef = document.querySelector('[data-destroy]');
+const boxesRef = document.querySelector("#boxes");
 
-// console.log(inputEl);
-// console.log(createBtn.dataset.action);
-// console.log(destroyBtn.dataset.action);
 
-inputEl.addEventListener('input', e => {
-  console.log(Number(e.currentTarget.value));
-  createBtn.addEventListener('click', () => {
-    const makeMarkup = `<div style="background-color: ${getRandomHexColor()}; width: ${divWidth}px; height: ${divHeight}px "></div>`;
+let divWidth = 20;
+let divHeight = 20;
 
-    boxEl.insertAdjacentHTML('afterbegin', makeMarkup);
-  });
-});
+const createBoxes = (amount) => {
+  const arr = [];
 
-destroyBtn.addEventListener('click', destroyBoxes);
+  for (let i = 1; i <= amount; i += 1) {
 
-let divWidth = 30;
-let divHeight = 30;
+    let makeMarkup = `<div style="background-color: ${getRandomHexColor()}; width:${divWidth += 10}px; height:${divHeight += 10}px;"></div>`;
+    arr.push(makeMarkup);
+  }
 
-// function onInputValue(e) {
 
-// //  return Number(e.currentTarget.value);
-//   console.log(Number(e.currentTarget.value));
-// }
-// console.log(onInputValue);
-
-// function createBoxes(amount) {
-
-//       const makeMarkup = `<div style="background-color: ${getRandomHexColor()}; width: ${divWidth}px; height: ${divHeight}px "></div>`;
-
-//       boxEl.insertAdjacentHTML('afterbegin', makeMarkup);
-
-// }
-
-function destroyBoxes() {
-  boxEl.innerHTML = '';
+  const markup = arr.join("");
+  // console.log(markup)
+  return boxesRef.insertAdjacentHTML("beforeend", markup);
 }
 
+
+const onDestroyBtnClick = () => {
+  boxesRef.innerHTML = "";
+}
+inputRef.addEventListener("blur", e => {
+
+  const inputValue = e.currentTarget.value;
+
+  creatBtnRef.addEventListener("click", () => {
+    createBoxes(inputValue);
+  });
+});
+destroyBtnRef.addEventListener("click", onDestroyBtnClick);
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
